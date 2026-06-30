@@ -1,1 +1,0 @@
-function exportProgress(){const blob=new Blob([JSON.stringify({a:1})],{type:'application/json'}),link=document.createElement('a');link.href=URL.createObjectURL(blob);link.download='backup.json';link.click();URL.revokeObjectURL(link.href)}
