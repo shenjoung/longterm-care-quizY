@@ -1,0 +1,5 @@
+function renderBackup(){setHeader('home');main.innerHTML='<h1>進度管理</h1><p class="subtitle">進度只儲存在目前這台裝置的瀏覽器。</p><div class="backup-actions"><button class="solid-button" id="exportButton">匯出進度備份</button><button class="danger-button" id="resetButton">清除全部進度</button></div><div class="note" style="margin-top:18px">更換手機、清除瀏覽器資料或使用無痕模式，紀錄可能消失。可先匯出備份檔保存。</div>';document.getElementById('exportButton').addEventListener('click',exportProgress);document.getElementById('resetButton').addEventListener('click',()=>{if(confirm('確定要清除所有作答紀錄嗎？')){store=defaultStore();saveStore();renderHome()}})}
+function exportProgress(){const blob=new Blob([JSON.stringify(store,null,2)],{type:'application/json'}),link=document.createElement('a');link.href=URL.createObjectURL(blob);link.download='長照題庫進度備份.json';link.click();URL.revokeObjectURL(link.href)}
+homeButton.addEventListener('click',renderHome);
+headerAction.addEventListener('click',()=>{const action=headerAction.dataset.action;if(action==='browse')renderBrowse();else if(action==='backup')renderBackup();else renderHome()});
+loadQuestions();
